@@ -35,6 +35,5 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('products', [ProductsController::class, 'add'])
-        ->name('product.add');
+    Route::resource('products', ProductsController::class);
 });
