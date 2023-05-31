@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\PurchasesController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
