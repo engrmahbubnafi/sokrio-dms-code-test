@@ -54,6 +54,12 @@ const logout = () => {
                             </div>
 
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink :href="route('products.index')" :active="route().current('products.index')">
+                                    Products
+                                </NavLink>
+                            </div>
+
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <NavLink :href="route('products.create')" :active="route().current('products.create')">
                                     Add Product
                                 </NavLink>
@@ -290,6 +296,12 @@ const logout = () => {
 
             <!-- Page Content -->
             <main>
+                <div v-if="$page.props.flash.message" class="bg-indigo-900 text-center py-4 lg:px-4">
+                  <div class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+                    {{ $page.props.flash.message }}
+                  </div>
+                </div>
+
                 <slot />
             </main>
         </div>
