@@ -2,32 +2,64 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\Purchase;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
+use Inertia\Response;
+use Throwable;
 
 class PurchasesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
-        //
+        $purchases = Purchase::get()->toArray();
+
+        return Inertia::render('Purchases/Index', ['purchases' => $purchases]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): Response
     {
-        //
+        $products = Product::get('name')->toArray();
+
+        return Inertia::render('Purchases/Create', ['products' => $products]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse|RedirectResponse
     {
-        //
+        $validated = $request->validate([
+            'product_id' => 'required',
+            'price' => 'required|numeric',
+            'quantity' => 'required'
+        ]);
+
+        DB::beginTransaction();
+        try {
+            Purchase::create($validated);
+
+            return redirect()
+                ->route('purchases.create')
+                ->with('message', 'Purchase created successfully!');
+        } catch (Throwable $throwable) {
+            DB::rollBack();
+
+            return response()->json([
+                'message' => $throwable->getMessage(),
+                'error' => true,
+            ]);
+        }
     }
 
     /**

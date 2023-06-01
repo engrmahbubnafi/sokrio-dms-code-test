@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\PurchasesController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,4 +36,6 @@ Route::middleware([
     })->name('dashboard');
 
     Route::resource('products', ProductsController::class);
+
+    Route::resource('purchases', PurchasesController::class);
 });
