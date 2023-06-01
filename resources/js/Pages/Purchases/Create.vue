@@ -19,7 +19,6 @@ function submit(){
 }
 
 const data = defineProps({ products: Object });
-console.log(data.products);
 </script>
 
 <template>
