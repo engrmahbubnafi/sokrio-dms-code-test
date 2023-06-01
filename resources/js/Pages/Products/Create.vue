@@ -9,7 +9,6 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 const form = useForm(
     {
         'name': '',
-        'price': '',
         'details': ''
     }
 )
@@ -37,12 +36,7 @@ function submit(){
                         <TextInput id="name" v-model="form.name" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required autocomplete="name" placeholder="Product Name" />
                         <InputError class="mt-2" :message="form.errors.name" />
                     </div>
-                    <!-- Product price input -->
-                    <div>
-                        <InputLabel for="price" value="Product Price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" />
-                        <input type="number" id="price" name="price" v-model="form.price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required placeholder="Product Price" />
-                        <InputError class="mt-2" :message="form.errors.name" />
-                    </div>
+
                     <!-- Product details input -->
                     <div>
                         <InputLabel for="details" value="Product Details" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" />

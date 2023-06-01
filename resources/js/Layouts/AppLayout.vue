@@ -64,6 +64,18 @@ const logout = () => {
                                     Add Product
                                 </NavLink>
                             </div>
+
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink :href="route('purchases.index')" :active="route().current('purchases.index')">
+                                    Purchases
+                                </NavLink>
+                            </div>
+
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink :href="route('purchases.create')" :active="route().current('purchases.create')">
+                                    New Purchase
+                                </NavLink>
+                            </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">

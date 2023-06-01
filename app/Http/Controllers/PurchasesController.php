@@ -29,7 +29,7 @@ class PurchasesController extends Controller
      */
     public function create(): Response
     {
-        $products = Product::get('name')->toArray();
+        $products = Product::pluck('name', 'id')->toArray();
 
         return Inertia::render('Purchases/Create', ['products' => $products]);
     }
@@ -39,6 +39,7 @@ class PurchasesController extends Controller
      */
     public function store(Request $request): JsonResponse|RedirectResponse
     {
+        dd($request);
         $validated = $request->validate([
             'product_id' => 'required',
             'price' => 'required|numeric',

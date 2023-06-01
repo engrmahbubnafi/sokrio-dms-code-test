@@ -7,7 +7,6 @@ DataTable.use(DataTablesCore);
 
 const columns = [
     { data: 'name', title: 'Name' },
-    { data: 'price', title: 'Price' },
     { data: 'details', title: 'Details' }
 ];
 
@@ -26,7 +25,6 @@ const data = defineProps(['products']);
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Details</th>
                     <th>Details</th>
                 </tr>
             </thead>
