@@ -14,7 +14,8 @@ import Welcome from '@/Components/Welcome.vue';
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <Welcome />
+                    <img src="https://sokrio.com/wp-content/uploads/2021/11/image-edited.jpg" />
+<!--                    <Welcome />-->
                 </div>
             </div>
         </div>
