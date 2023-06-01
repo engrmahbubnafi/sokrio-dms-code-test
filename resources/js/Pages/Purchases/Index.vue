@@ -6,7 +6,7 @@ import DataTablesCore from 'datatables.net';
 DataTable.use(DataTablesCore);
 
 const columns = [
-    { data: 'product_id', title: 'Product' },
+    { data: 'name', title: 'Product' },
     { data: 'price', title: 'Price' },
     { data: 'quantity', title: 'Quantity' }
 ];

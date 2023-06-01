@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\Stock;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,7 +20,10 @@ class PurchasesController extends Controller
      */
     public function index(): Response
     {
-        $purchases = Purchase::get()->toArray();
+        $purchases = Purchase::join('stocks', 'stocks.product_id', 'purchases.product_id')
+            ->join('products', 'products.id', 'purchases.product_id')
+            ->select('products.name', 'purchases.price', 'stocks.quantity')
+            ->get();
 
         return Inertia::render('Purchases/Index', ['purchases' => $purchases]);
     }
@@ -39,7 +43,6 @@ class PurchasesController extends Controller
      */
     public function store(Request $request): JsonResponse|RedirectResponse
     {
-        dd($request);
         $validated = $request->validate([
             'product_id' => 'required',
             'price' => 'required|numeric',
@@ -48,7 +51,15 @@ class PurchasesController extends Controller
 
         DB::beginTransaction();
         try {
-            Purchase::create($validated);
+            Purchase::create([
+                'product_id' => $validated['product_id'],
+                'price' => $validated['price']
+            ]);
+
+            Stock::create([
+                'product_id' => $validated['product_id'],
+                'quantity' => $validated['quantity']
+            ]);
 
             return redirect()
                 ->route('purchases.create')
