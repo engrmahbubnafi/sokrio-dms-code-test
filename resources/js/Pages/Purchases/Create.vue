@@ -43,8 +43,9 @@ function showStock(productId) {
                 <form class="space-y-6" @submit.prevent="submit">
 
                     <h5 class="text-xl font-medium text-gray-900 dark:text-white">Add product</h5>
+                    Product ID: {{ form.product_id }}
                     <!-- Product Dropdown -->
-                    <select name="product_id" id="product_id" v-model="form.product_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                    <select name="product_id" id="product_id" v-model="form.product_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" @change="showStock(form.product_id)">
                         <option value="">Select a product</option>
                         <option v-for="(product, id) in data.products" :value="id">{{ product }}</option>
                     </select>
@@ -52,7 +53,7 @@ function showStock(productId) {
                     <!-- Product stock readonly -->
                     <div v-show="form.product_id">
                         <InputLabel for="stock" value="Product Stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" />
-                        <input type="number" id="stock" :value="showStock(form.product_id)" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required readonly />
+                        <input type="number" id="stock" :value="stock" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required readonly />
                         <InputError class="mt-2" :message="form.errors.price" />
                     </div>
 
