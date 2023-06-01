@@ -38,4 +38,7 @@ Route::middleware([
     Route::resource('products', ProductsController::class);
 
     Route::resource('purchases', PurchasesController::class);
+
+    Route::post('show-stock', [PurchasesController::class, 'showStock'])
+        ->name('ajax.showStock');
 });

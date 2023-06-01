@@ -2,10 +2,9 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import {useForm} from "@inertiajs/vue3";
 import InputLabel from "@/Components/InputLabel.vue";
-import TextInput from "@/Components/TextInput.vue";
 import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import Dropdown from "../../../../vendor/laravel/jetstream/stubs/inertia/resources/js/Components/Dropdown.vue";
+import axios from "axios";
 
 const form = useForm(
     {
@@ -19,6 +18,16 @@ function submit(){
 }
 
 const data = defineProps({ products: Object });
+let stock = 0;
+
+function showStock(productId) {
+    axios.post(route('ajax.showStock', { product_id: productId }))
+        .then((res) => {
+            stock = res.data[0].quantity;
+        })
+
+    return stock;
+}
 </script>
 
 <template>
@@ -39,6 +48,13 @@ const data = defineProps({ products: Object });
                         <option value="">Select a product</option>
                         <option v-for="(product, id) in data.products" :value="id">{{ product }}</option>
                     </select>
+
+                    <!-- Product stock readonly -->
+                    <div v-show="form.product_id">
+                        <InputLabel for="stock" value="Product Stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" />
+                        <input type="number" id="stock" :value="showStock(form.product_id)" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required readonly />
+                        <InputError class="mt-2" :message="form.errors.price" />
+                    </div>
 
                     <!-- Product price input -->
                     <div>

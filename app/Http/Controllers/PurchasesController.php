@@ -105,4 +105,14 @@ class PurchasesController extends Controller
     {
         //
     }
+
+    public function showStock(Request $request)
+    {
+        $productId = $request->validate([
+            'product_id' => 'required'
+        ]);
+
+        return Stock::where('product_id', $productId)
+            ->get('quantity');
+    }
 }
